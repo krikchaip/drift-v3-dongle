@@ -14,6 +14,11 @@ This version replaces the older editor-based builds and makes it much easier to 
 
 ---
 
+## 🔋 Battery Installation  
+More on how to [install batteries](/batteries/)  
+
+---
+
 ## 🔄 Reflashing Instructions
 
 If your keyboard already has firmware installed, you usually don’t need to reflash.  
@@ -94,4 +99,5 @@ All third-party code remains under their original licenses (MIT).
 ---
 
 - The PCB is not open source, but you could [contact me](https://www.instagram.com/majin.keyboards) if you would like a pair, that would really help me out :)  
+
 
