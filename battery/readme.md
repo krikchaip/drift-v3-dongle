@@ -60,7 +60,7 @@ Battery installation basically requires you to unscrew the battery compartment u
    - <img src="images/9.jpg" width="500">
 
 10. **Correctly Plug OLED back in**  
-   - For standard 4-Pin OLEDS, the four left pins are used.  
+   - For standard 4-Pin OLEDS, the four left pin sockets are used.  
    - The 5th pin is for the Nice!View screen and requires different firmware.  
    - Since there is a dongle you can remove the OLEDs altogether to increase battery life!  
    - <img src="images/10.jpg" width="500">
