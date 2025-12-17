@@ -36,18 +36,19 @@
 
         /* === smooth / fluid strafe behavior instances === */
         last_input_a: last_input_a {
-            compatible = "zmk,behavior-last-input";
-            label = "LAST_INPUT_A";
-            #binding-cells = <0>;
-            keycode = <A>;
-        };
+			compatible = "zmk,behavior-last-input";
+			label = "LAST_INPUT_A";
+			#binding-cells = <0>;
+			bindings = <&kp A>;
+		};
 
-        last_input_d: last_input_d {
-            compatible = "zmk,behavior-last-input";
-            label = "LAST_INPUT_D";
-            #binding-cells = <0>;
-            keycode = <D>;
-        };
+		last_input_d: last_input_d {
+			compatible = "zmk,behavior-last-input";
+			label = "LAST_INPUT_D";
+			#binding-cells = <0>;
+			bindings = <&kp D>;
+};
+
     };
 
 
