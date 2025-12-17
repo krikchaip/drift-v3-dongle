@@ -38,16 +38,17 @@
 	
 	/* === smooth/fluid strafe behavior instances === */
     last_input_a: last_input_a {
-        compatible = "zmk,behavior-last-input";
-        label = "LAST_INPUT_A";
-        keycode = <HID_USAGE_KEY_A>;
-    };
+		compatible = "zmk,behavior-last-input";
+		label = "LAST_INPUT_A";
+		keycode = <A>;
+	};
 
-    last_input_d: last_input_d {
-        compatible = "zmk,behavior-last-input";
-        label = "LAST_INPUT_D";
-        keycode = <HID_USAGE_KEY_D>;
-    };
+	last_input_d: last_input_d {
+		compatible = "zmk,behavior-last-input";
+		label = "LAST_INPUT_D";
+		keycode = <D>;
+	};
+
 
     keymap {
         compatible = "zmk,keymap";
