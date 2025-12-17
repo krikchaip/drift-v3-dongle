@@ -34,14 +34,14 @@
             tap-ms = <20>;
         };
 
-        /* Setup left and right of WASD */
+        /* Setup left and right */
         kpad: key_lip_a_d {
                 compatible = "zmk,behavior-key-press-lip";
                 #binding-cells = <1>;
                 keycodes = <A D>;
         };
 
-        /* Setup up and down of WASD */
+        /* Setup up and down */
         kpws: key_lip_w_s {
                 compatible = "zmk,behavior-key-press-lip";
                 #binding-cells = <1>;
