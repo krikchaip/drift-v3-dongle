@@ -1,16 +1,15 @@
-manifest:
-  remotes:
+remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: timception
-      url-base: https://github.com/timception
+    - name: badjeff
+      url-base: https://github.com/badjeff
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: v0.3.0
       import: app/west.yml
     - name: zmk-behavior-key-press-lip
-      remote: timception
+      remote: badjeff
       revision: main
   self:
     path: config
