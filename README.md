@@ -3,7 +3,7 @@
 ![Drift Keyboard V3 by Timception](https://github.com/Timception/drift-v3-dongle/blob/main/keymap-drawer/DriftJTK-HyperfusenoBG.png)
 
 Firmware for the **Drift Keyboard V3 by Timception** with **ZMK Studio** enabled.  
-This version replaces the older editor-based builds and makes it much easier to view and customize your layout directly in [ZMK Studio](https://studio.zmk.dev).
+This version replaces the previous builds and makes it much easier to view and customize your layout directly in [ZMK Studio](https://studio.zmk.dev).
 
 ---
 
@@ -15,7 +15,7 @@ This version replaces the older editor-based builds and makes it much easier to 
 ---
 
 ## 🔋 Battery Installation  
-More on how to [install batteries](/battery/)  
+How to [install batteries](/battery/) and Charging.  
 
 ---
 
@@ -99,6 +99,8 @@ All third-party code remains under their original licenses (MIT).
 ---
 
 - The PCB is not open source, but you could [contact me](https://www.instagram.com/majin.keyboards) if you would like a pair, that would really help me out :)  
+
+
 
 
 
