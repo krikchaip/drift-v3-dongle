@@ -4,15 +4,15 @@
 #include <zmk/events/keycode_state_changed.h>
 #include <zmk/hid.h>
 
-/* ZMK-encoded keycodes for A and D */
+/* ZMK-encoded keycodes */
 #define KC_A ZMK_HID_USAGE(HID_USAGE_KEYBOARD, HID_USAGE_KEY_KEYBOARD_A)
 #define KC_D ZMK_HID_USAGE(HID_USAGE_KEYBOARD, HID_USAGE_KEY_KEYBOARD_D)
 
-/* Physical key state */
+/* Physical state */
 static bool a_down = false;
 static bool d_down = false;
 
-/* What ZMK currently has pressed */
+/* Active (synthetic) state */
 static bool a_active = false;
 static bool d_active = false;
 
@@ -33,12 +33,14 @@ static int smooth_strafe_listener(const zmk_event_t *eh) {
 
         if (d_active) {
             d_active = false;
-            raise_zmk_keycode_state_changed(KC_D, false, ev->timestamp);
+            raise_zmk_keycode_state_changed_from_encoded(
+                KC_D, false, ev->timestamp);
         }
 
         if (!a_active) {
             a_active = true;
-            raise_zmk_keycode_state_changed(KC_A, true, ev->timestamp);
+            raise_zmk_keycode_state_changed_from_encoded(
+                KC_A, true, ev->timestamp);
         }
 
         return ZMK_EV_EVENT_HANDLED;
@@ -50,12 +52,14 @@ static int smooth_strafe_listener(const zmk_event_t *eh) {
 
         if (a_active) {
             a_active = false;
-            raise_zmk_keycode_state_changed(KC_A, false, ev->timestamp);
+            raise_zmk_keycode_state_changed_from_encoded(
+                KC_A, false, ev->timestamp);
         }
 
         if (d_down && !d_active) {
             d_active = true;
-            raise_zmk_keycode_state_changed(KC_D, true, ev->timestamp);
+            raise_zmk_keycode_state_changed_from_encoded(
+                KC_D, true, ev->timestamp);
         }
 
         return ZMK_EV_EVENT_HANDLED;
@@ -67,12 +71,14 @@ static int smooth_strafe_listener(const zmk_event_t *eh) {
 
         if (a_active) {
             a_active = false;
-            raise_zmk_keycode_state_changed(KC_A, false, ev->timestamp);
+            raise_zmk_keycode_state_changed_from_encoded(
+                KC_A, false, ev->timestamp);
         }
 
         if (!d_active) {
             d_active = true;
-            raise_zmk_keycode_state_changed(KC_D, true, ev->timestamp);
+            raise_zmk_keycode_state_changed_from_encoded(
+                KC_D, true, ev->timestamp);
         }
 
         return ZMK_EV_EVENT_HANDLED;
@@ -80,23 +86,3 @@ static int smooth_strafe_listener(const zmk_event_t *eh) {
 
     /* ---------- D released ---------- */
     if (kc == KC_D && !pressed) {
-        d_down = false;
-
-        if (d_active) {
-            d_active = false;
-            raise_zmk_keycode_state_changed(KC_D, false, ev->timestamp);
-        }
-
-        if (a_down && !a_active) {
-            a_active = true;
-            raise_zmk_keycode_state_changed(KC_A, true, ev->timestamp);
-        }
-
-        return ZMK_EV_EVENT_HANDLED;
-    }
-
-    return ZMK_EV_EVENT_BUBBLE;
-}
-
-ZMK_LISTENER(smooth_strafe, smooth_strafe_listener);
-ZMK_SUBSCRIPTION(smooth_strafe, zmk_keycode_state_changed);
