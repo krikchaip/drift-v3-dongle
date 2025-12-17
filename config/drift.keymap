@@ -36,7 +36,7 @@
         };
     };
 	
-	/* === smooth strafe behavior instances === */
+	/* === smooth/fluid strafe behavior instances === */
     last_input_a: last_input_a {
         compatible = "zmk,behavior-last-input";
         label = "LAST_INPUT_A";
