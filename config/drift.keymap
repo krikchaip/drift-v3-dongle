@@ -34,22 +34,14 @@
             tap-ms = <20>;
         };
 
-        /* === Last Input Priority (key-press-lip) for A/D === */
+        /* Last Input Priority for A / D
+         * Uses zmk-behavior-key-press-lip (existing module)
+         */
         kpad: key_lip_a_d {
             compatible = "zmk,behavior-key-press-lip";
             #binding-cells = <1>;
             keycodes = <A D>;
         };
-
-        /* (optional) if you want WASD up/down pair too:
-        kpws: key_lip_w_s {
-            compatible = "zmk,behavior-key-press-lip";
-            #binding-cells = <1>;
-            keycodes = <W S>;
-        };
-        */
-};
-
     };
 
 
