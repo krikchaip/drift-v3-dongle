@@ -3,7 +3,7 @@
 ![Drift Keyboard V3 by Timception](https://github.com/Timception/drift-v3-dongle/blob/main/keymap-drawer/DriftJTK-HyperfusenoBG.png)
 
 Firmware for the **Drift Keyboard V3 by Timception** with **ZMK Studio** enabled.  
-This version replaces the previous builds and makes it much easier to view and customize your layout directly in [ZMK Studio](https://studio.zmk.dev).
+This version replaces the previous builds and makes it much easier to view, and customize your layout directly in [ZMK Studio](https://studio.zmk.dev).
 
 ---
 
