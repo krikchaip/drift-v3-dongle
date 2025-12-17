@@ -41,6 +41,7 @@
                 keycodes = <A D>;
         };
 
+
         /* Setup up and down of WASD */
         kpws: key_lip_w_s {
                 compatible = "zmk,behavior-key-press-lip";
