@@ -31,23 +31,24 @@
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
-
             tap-ms = <20>;
         };
-    };
-	
-	/* === smooth/fluid strafe behavior instances === */
-    last_input_a: last_input_a {
-		compatible = "zmk,behavior-last-input";
-		label = "LAST_INPUT_A";
-		keycode = <A>;
-	};
 
-	last_input_d: last_input_d {
-		compatible = "zmk,behavior-last-input";
-		label = "LAST_INPUT_D";
-		keycode = <D>;
-	};
+        /* === smooth / fluid strafe behavior instances === */
+        last_input_a: last_input_a {
+            compatible = "zmk,behavior-last-input";
+            label = "LAST_INPUT_A";
+            #binding-cells = <0>;
+            keycode = <A>;
+        };
+
+        last_input_d: last_input_d {
+            compatible = "zmk,behavior-last-input";
+            label = "LAST_INPUT_D";
+            #binding-cells = <0>;
+            keycode = <D>;
+        };
+    };
 
 
     keymap {
