@@ -48,13 +48,13 @@
         cmd_on: cmd_on {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_press &kp LGUI>;
+            bindings = <&macro_press>, <&kp LGUI>;
         };
 
         cmd_off: cmd_off {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_release &kp LGUI>;
+            bindings = <&macro_release>, <&kp LGUI>;
         };
 
         swapper_next: swapper_next {
@@ -62,7 +62,8 @@
             label = "SWAPPER_NEXT";
             #binding-cells = <0>;
             bindings = <&cmd_on>, <&kp TAB>, <&cmd_off>;
-            timeout-ms = <1500>;
+
+            timeout-ms = <3000>;
         };
 
         swapper_prev: swapper_prev {
@@ -70,7 +71,8 @@
             label = "SWAPPER_PREV";
             #binding-cells = <0>;
             bindings = <&cmd_on>, <&kp LS(TAB)>, <&cmd_off>;
-            timeout-ms = <1500>;
+
+            timeout-ms = <3000>;
         };
 
         enc_tabswitch: enc_tabswitch {
@@ -80,18 +82,24 @@
         };
     };
 
+    macros {
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         base {
             bindings = <
-&kp LC(LG(Y))  &kp ESC  &kp GRAVE   &kp N1    &kp N2  &kp N3    &kp N4        &kp N5                             &kp N6     &kp N7        &kp N8          &kp N9   &kp N0    &kp MINUS          &kp EQUAL  &kp BSPC
-&kp F15        &kp F16  &lt FN TAB  &kp Q     &kp W   &kp E     &kp R         &kp T                              &kp Y      &kp U         &kp I           &kp O    &kp P     &kp LBKT           &kp RBKT   &kp BSLH
-               &kp F17  &kp CAPS    &kp A     &kp S   &kp D     &kp F         &kp G                              &kp H      &kp J         &kp K           &kp L    &kp SEMI  &kp APOS           &kp UP
-&kp F19        &kp F18  &kp LSHFT   &kp Z     &kp X   &kp C     &kp V         &kp B      &kp K_MUTE    &none     &kp N      &kp M         &kp COMMA       &kp DOT  &kp FSLH  &left_arrow_morph  &kp DOWN   &kp RIGHT
-                                                      &kp LALT  &mt LGUI F13  &kp SPACE                          &kp SPACE  &mt RGUI F13  &mt RALT ENTER
+&kp LC(LG(Y))  &kp ESC  &kp GRAVE   &kp N1  &kp N2  &kp N3    &kp N4        &kp N5                        &kp N6     &kp N7        &kp N8          &kp N9   &kp N0    &kp MINUS          &kp EQUAL  &kp BSPC
+&kp F15        &kp F16  &lt FN TAB  &kp Q   &kp W   &kp E     &kp R         &kp T                         &kp Y      &kp U         &kp I           &kp O    &kp P     &kp LBKT           &kp RBKT   &kp BSLH
+               &kp F17  &kp CAPS    &kp A   &kp S   &kp D     &kp F         &kp G                         &kp H      &kp J         &kp K           &kp L    &kp SEMI  &kp APOS           &kp UP
+&kp F19        &kp F18  &kp LSHFT   &kp Z   &kp X   &kp C     &kp V         &kp B      &kp K_MUTE  &none  &kp N      &kp M         &kp COMMA       &kp DOT  &kp FSLH  &left_arrow_morph  &kp DOWN   &kp RIGHT
+                                                    &kp LALT  &mt LGUI F13  &kp SPACE                     &kp SPACE  &mt RGUI F13  &mt RALT ENTER
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>, <&enc_tabswitch 0 0>;
+
+            sensor-bindings =
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
+                <&enc_tabswitch 0 0>;
         };
 
         fn {
@@ -103,7 +111,10 @@
 &trans  &trans  &trans  &trans                &trans                &trans          &trans   &trans              &trans  &trans  &trans          &trans        &trans            &trans              &trans      &trans        &trans        &trans
                                                                     &trans          &trans   &trans                              &trans          &trans        &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>, <&enc_tabswitch 0 0>;
+
+            sensor-bindings =
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
+                <&enc_tabswitch 0 0>;
         };
     };
 };
