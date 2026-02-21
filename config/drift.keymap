@@ -10,10 +10,8 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define BASE 0
-#define LOWER 1
-#define RAISE 2
-#define ADJUST 3
-#define TABSWITCH 4
+#define FN 1
+#define TABSWITCH 2
 
 / {
     conditional_layers { compatible = "zmk,conditional-layers"; };
@@ -47,9 +45,6 @@
             mods = <(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI|MOD_RCTL|MOD_RALT|MOD_RGUI)>;
             keep-mods = <(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI|MOD_RCTL|MOD_RALT|MOD_RGUI)>;
         };
-
-        /* Setup left and right */
-        /* Setup up and down */
 
         enc_tabswitch_base: enc_tabswitch_base {
             compatible = "zmk,behavior-sensor-rotate-var";
@@ -90,9 +85,10 @@
         };
 
         tabswitch_timeout: tabswitch_timeout {
-            compatible = "zmk,behavior-macro-two-param";
+            compatible = "zmk,behavior-layer-tap";
             #binding-cells = <2>;
-            bindings = <&tabswitch_exit>;
+            tapping-term-ms = <600>; 
+            bindings = <&tabswitch_exit>, <&none>;
         };
 
         tabswitch_exit: tabswitch_exit {
@@ -108,7 +104,7 @@
         base {
             bindings = <
 &kp LC(LG(Y))    &kp ESC  &kp GRAVE  &kp N1  &kp N2  &kp N3    &kp N4        &kp N5                                &kp N6     &kp N7        &kp N8          &kp N9   &kp N0    &kp MINUS          &kp EQUAL  &kp BSPC
-&kp F15          &kp F16  &lt 1 TAB  &kp Q   &kp W   &kp E     &kp R         &kp T                                 &kp Y      &kp U         &kp I           &kp O    &kp P     &kp LBKT           &kp RBKT   &kp BSLH
+&kp F15          &kp F16  &lt FN TAB  &kp Q   &kp W   &kp E     &kp R         &kp T                                 &kp Y      &kp U         &kp I           &kp O    &kp P     &kp LBKT           &kp RBKT   &kp BSLH
                  &kp F17  &kp CAPS   &kp A   &kp S   &kp D     &kp F         &kp G                                 &kp H      &kp J         &kp K           &kp L    &kp SEMI  &kp APOS           &kp UP
 &kp LA(LG(ESC))  &kp F18  &kp LSHFT  &kp Z   &kp X   &kp C     &kp V         &kp B      &kp K_MUTE  &kp RG(SPACE)  &kp N      &kp M         &kp COMMA       &kp DOT  &kp FSLH  &left_arrow_morph  &kp DOWN   &kp RIGHT
                                                      &kp LALT  &mt LGUI F13  &kp SPACE                             &kp SPACE  &mt RGUI F13  &mt RALT ENTER
@@ -116,8 +112,8 @@
 
             label = "base";
             sensor-bindings =
-                <&enc_tabswitch_base 0 0>,
-                <&enc_scroll SCRL_UP SCRL_DOWN>;
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
+                <&enc_tabswitch_base 0 0>;
         };
 
         fn {
@@ -146,8 +142,8 @@
 
             label = "tabswitch";
             sensor-bindings =
-                <&enc_tabswitch_active 0 0>,
-                <&enc_scroll SCRL_UP SCRL_DOWN>;
+                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
+                <&enc_tabswitch_active 0 0>;
         };
     };
 };
