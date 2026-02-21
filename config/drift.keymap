@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 1500  // default: 600
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 120    // default: 10 - for encoder mouse-scroll to work
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 120   // default: 10 - for encoder mouse-scroll to work
 
 #include <dt-bindings/zmk/mouse.h>
 #include <behaviors.dtsi>
@@ -10,9 +10,7 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define BASE 0
-#define LOWER 1
-#define RAISE 2
-#define ADJUST 3
+#define FN 1
 
 / {
     conditional_layers { compatible = "zmk,conditional-layers"; };
@@ -47,8 +45,39 @@
             keep-mods = <(MOD_LCTL|MOD_LSFT|MOD_LALT|MOD_LGUI|MOD_RCTL|MOD_RALT|MOD_RGUI)>;
         };
 
-        /* Setup left and right */
-        /* Setup up and down */
+        cmd_on: cmd_on {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LGUI>;
+        };
+
+        cmd_off: cmd_off {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_release &kp LGUI>;
+        };
+
+        swapper_next: swapper_next {
+            compatible = "zmk,behavior-tri-state";
+            label = "SWAPPER_NEXT";
+            #binding-cells = <0>;
+            bindings = <&cmd_on>, <&kp TAB>, <&cmd_off>;
+            timeout-ms = <1500>;
+        };
+
+        swapper_prev: swapper_prev {
+            compatible = "zmk,behavior-tri-state";
+            label = "SWAPPER_PREV";
+            #binding-cells = <0>;
+            bindings = <&cmd_on>, <&kp LS(TAB)>, <&cmd_off>;
+            timeout-ms = <1500>;
+        };
+
+        enc_tabswitch: enc_tabswitch {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&swapper_next>, <&swapper_prev>;
+        };
     };
 
     keymap {
@@ -56,20 +85,17 @@
 
         base {
             bindings = <
-&kp LC(LG(Y))    &kp ESC  &kp GRAVE  &kp N1  &kp N2  &kp N3    &kp N4        &kp N5                                &kp N6     &kp N7        &kp N8          &kp N9   &kp N0    &kp MINUS          &kp EQUAL  &kp BSPC
-&kp F15          &kp F16  &lt 1 TAB  &kp Q   &kp W   &kp E     &kp R         &kp T                                 &kp Y      &kp U         &kp I           &kp O    &kp P     &kp LBKT           &kp RBKT   &kp BSLH
-                 &kp F17  &kp CAPS   &kp A   &kp S   &kp D     &kp F         &kp G                                 &kp H      &kp J         &kp K           &kp L    &kp SEMI  &kp APOS           &kp UP
-&kp LA(LG(ESC))  &kp F18  &kp LSHFT  &kp Z   &kp X   &kp C     &kp V         &kp B      &kp K_MUTE  &kp RG(SPACE)  &kp N      &kp M         &kp COMMA       &kp DOT  &kp FSLH  &left_arrow_morph  &kp DOWN   &kp RIGHT
-                                                     &kp LALT  &mt LGUI F13  &kp SPACE                             &kp SPACE  &mt RGUI F13  &mt RALT ENTER
+&kp LC(LG(Y))  &kp ESC  &kp GRAVE   &kp N1    &kp N2  &kp N3    &kp N4        &kp N5                             &kp N6     &kp N7        &kp N8          &kp N9   &kp N0    &kp MINUS          &kp EQUAL  &kp BSPC
+&kp F15        &kp F16  &lt FN TAB  &kp Q     &kp W   &kp E     &kp R         &kp T                              &kp Y      &kp U         &kp I           &kp O    &kp P     &kp LBKT           &kp RBKT   &kp BSLH
+               &kp F17  &kp CAPS    &kp A     &kp S   &kp D     &kp F         &kp G                              &kp H      &kp J         &kp K           &kp L    &kp SEMI  &kp APOS           &kp UP
+&kp F19        &kp F18  &kp LSHFT   &kp Z     &kp X   &kp C     &kp V         &kp B      &kp K_MUTE    &none     &kp N      &kp M         &kp COMMA       &kp DOT  &kp FSLH  &left_arrow_morph  &kp DOWN   &kp RIGHT
+                                                      &kp LALT  &mt LGUI F13  &kp SPACE                          &kp SPACE  &mt RGUI F13  &mt RALT ENTER
             >;
-
-            label = "base";
-            sensor-bindings =
-                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
-                <&enc_scroll SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>, <&enc_tabswitch 0 0>;
         };
 
         fn {
+            label = "fn";
             bindings = <
 &trans  &trans  &trans  &kp F1                &kp F2                &kp F3          &kp F4   &kp F5                              &kp F6          &kp F7        &kp F8            &kp F9              &kp F10     &kp F11       &kp F12       &trans
 &trans  &trans  &none   &kp C_BRIGHTNESS_DEC  &kp C_BRIGHTNESS_INC  &kp LC(LG(UP))  &kp F14  &kp LC(LS(LG(N4)))                  &kp LS(LG(N4))  &kp C_REWIND  &kp C_PLAY_PAUSE  &kp C_FAST_FORWARD  &kp K_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &trans
@@ -77,11 +103,7 @@
 &trans  &trans  &trans  &trans                &trans                &trans          &trans   &trans              &trans  &trans  &trans          &trans        &trans            &trans              &trans      &trans        &trans        &trans
                                                                     &trans          &trans   &trans                              &trans          &trans        &trans
             >;
-
-            label = "fn";
-            sensor-bindings =
-                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
-                <&enc_scroll SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>, <&enc_tabswitch 0 0>;
         };
     };
 };
