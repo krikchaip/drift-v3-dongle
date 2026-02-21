@@ -13,6 +13,7 @@
 #define LOWER 1
 #define RAISE 2
 #define ADJUST 3
+#define TABSWITCH 4
 
 / {
     conditional_layers { compatible = "zmk,conditional-layers"; };
@@ -49,6 +50,56 @@
 
         /* Setup left and right */
         /* Setup up and down */
+
+        enc_tabswitch_base: enc_tabswitch_base {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&tabswitch_enter_next>, <&tabswitch_enter_prev>;
+        };
+
+        tabswitch_enter_next: tabswitch_enter_next {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>; tap-ms = <20>;
+            bindings = <&macro_press &kp LGUI>, <&macro_tap &kp TAB>, <&to TABSWITCH>;
+        };
+
+        tabswitch_enter_prev: tabswitch_enter_prev {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>; tap-ms = <20>;
+            bindings = <&macro_press &kp LGUI>, <&macro_press &kp LSFT>, <&macro_tap &kp TAB>, <&macro_release &kp LSFT>, <&to TABSWITCH>;
+        };
+
+        enc_tabswitch_active: enc_tabswitch_active {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            #sensor-binding-cells = <2>;
+            bindings = <&tabswitch_next_active>, <&tabswitch_prev_active>;
+        };
+
+        tabswitch_next_active: tabswitch_next_active {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_tap &kp TAB>, <&tabswitch_timeout 0 0>;
+        };
+
+        tabswitch_prev_active: tabswitch_prev_active {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LSFT>, <&macro_tap &kp TAB>, <&macro_release &kp LSFT>, <&tabswitch_timeout 0 0>;
+        };
+
+        tabswitch_timeout: tabswitch_timeout {
+            compatible = "zmk,behavior-macro-two-param";
+            #binding-cells = <2>;
+            bindings = <&tabswitch_exit>;
+        };
+
+        tabswitch_exit: tabswitch_exit {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_release &kp LGUI>, <&to BASE>;
+        };
     };
 
     keymap {
@@ -65,7 +116,7 @@
 
             label = "base";
             sensor-bindings =
-                <&inc_dec_kp C_VOL_DN C_VOL_UP>,
+                <&enc_tabswitch_base 0 0>,
                 <&enc_scroll SCRL_UP SCRL_DOWN>;
         };
 
@@ -81,6 +132,21 @@
             label = "fn";
             sensor-bindings =
                 <&inc_dec_kp C_VOL_DN C_VOL_UP>,
+                <&enc_scroll SCRL_UP SCRL_DOWN>;
+        };
+
+        tabswitch {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                              &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                              &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans                              &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                                        &trans  &trans  &trans                              &trans  &trans  &trans
+            >;
+
+            label = "tabswitch";
+            sensor-bindings =
+                <&enc_tabswitch_active 0 0>,
                 <&enc_scroll SCRL_UP SCRL_DOWN>;
         };
     };
