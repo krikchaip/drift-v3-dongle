@@ -78,7 +78,7 @@
         enc_tabswitch: enc_tabswitch {
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
-            bindings = <&swapper_next>, <&swapper_prev>;
+            bindings = <&swapper_prev>, <&swapper_next>;
         };
     };
 
