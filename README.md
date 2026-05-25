@@ -3,7 +3,9 @@
 ![Drift Keyboard V3 by Timception](https://github.com/Timception/drift-v3-dongle/blob/main/keymap-drawer/DriftJTK-HyperfusenoBG.png)
 
 Firmware for the **Drift Keyboard V3 by Timception** with **ZMK Studio** enabled.  
-This version replaces the previous builds and makes it much easier to view, and customize your layout directly in [ZMK Studio](https://studio.zmk.dev).
+You can customize your layout directly in [ZMK Studio](https://studio.zmk.dev)  
+
+**Mac users can setup this keyboard** [following this guide](https://github.com/Timception/drift-v3-dongle/tree/main/precompiled-firmware/Mac-OS-keys/)  
 
 ---
 
@@ -21,18 +23,17 @@ How to [install batteries](/battery/) and Charging.
 
 ## 🔄 Reflashing Instructions
 
-If your keyboard already has firmware installed, you usually don’t need to reflash.  
+Your keyboard already has firmware installed, you usually don’t need to reflash.  
 But if you want to update to the latest build, here’s how to do it:
 
 1. **Download the latest firmware**  
-   - Go to the **[Actions tab](https://github.com/Timception/drift-v3-dongle/actions)** in this repo.  
-   - Open the latest successful build and download the **firmware .zip file**.
+   - Go to the **[precompiled-firmware](https://github.com/Timception/drift-v3-dongle/tree/main/precompiled-firmware)** in this repo.  
+   - Download the **firmware .zip file**.  
 
 2. **Unzip the file**  
    - Inside you’ll find multiple `.uf2` files:       
      - `drift_central_dongle.uf2` → Dongle firmware  
      - `drift_left.uf2` → Left half firmware  
-	 - `drift_left_central.uf2` → No Dongle (Left half acts as central - standard bluetooth)  
      - `drift_right.uf2` → Right half firmware  
 	 - `settings_reset-nice_nano_v2-zmk.uf2` → Settings Reset firmware (needed to clean devices before new firmware)  
 
@@ -73,7 +74,7 @@ But if you want to update to the latest build, here’s how to do it:
     - Now you can view and customize your keys to your hearts content.  
 	
 11. **Useful Links for further tinkering:**  
-	- More information on all the different [keys and keycodes](https://zmk.dev/docs/keymaps/list-of-keycodes) app online to see your Drift keyboard.  
+	- More information on all the different [keys and keycodes](https://zmk.dev/docs/keymaps/list-of-keycodes)  
 	- The original [Drift Keyboard V3](https://github.com/Timception/zmk-config-drift-v3-editor) that uses the more detailed keymapper by [Nick Coutsos](https://nickcoutsos.github.io/keymap-editor/).  
 
 ---
@@ -93,8 +94,9 @@ This project makes use of code and ideas from the following repositories:
 - [ZMK Firmware](https://github.com/zmkfirmware) (MIT License) - Zephyr™ Mechanical Keyboard (ZMK) Firmware  
 - [leafflat/sai44](https://github.com/leafflat/sai44) (MIT License) – Dongle code reference  
 - [caksoylar](https://github.com/caksoylar/keymap-drawer) (MIT License) - Keymap Drawer  
+- [badjeff/zmk-behavior-key-press-lip](https://github.com/badjeff/zmk-behavior-key-press-lip) - LIP Key Press Behavior  
 
-All third-party code remains under their original licenses (MIT).  
+All third-party code remains under their original licenses.  
 
 ---
 

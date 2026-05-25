@@ -10,18 +10,6 @@ endif
 
 
 
-if SHIELD_DRIFT_LEFT_CENTRAL
-
-config ZMK_KEYBOARD_NAME
-    default "Drift V3"
-
-config ZMK_SPLIT_ROLE_CENTRAL
-    default y
-
-endif
-
-
-
 if ZMK_DISPLAY
 
 config I2C
